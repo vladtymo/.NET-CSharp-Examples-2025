@@ -38,13 +38,19 @@
             }
         }
         // ---- readonly property
-        public string Status
-        {
-            get
-            {
-                return this.isPowerOn ? "ON" : "OFF";
-            }
-        }
+        //public string Status
+        //{
+        //    get
+        //    {
+        //        return this.isPowerOn ? "ON" : "OFF";
+        //    }
+        //}
+        //public string Status
+        //{
+        //    get => this.isPowerOn ? "ON" : "OFF";
+        //}
+        public string Status => this.isPowerOn ? "ON" : "OFF";
+
         // ---- auto-property
         // snippet: propfull
         //private decimal price;
@@ -144,7 +150,7 @@
         {
             // --------- create instance of the class
             Conditioner my = new Conditioner("Samsung", "White"); // invoke constructor
-            
+           
             my.Temperature = 23;  // set - set value
             my.Temperature = -10; // set - ignore value
 
