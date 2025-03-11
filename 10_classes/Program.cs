@@ -61,7 +61,7 @@
 
         // ------------- constructors
         // invokes automatically when object is creating
-        public Conditioner() : this("no model", "no color") // constructor delegation
+        public Conditioner() : this("empty", "empty") // constructor delegation
         {
         }
         public Conditioner(string model, string color)
@@ -74,7 +74,7 @@
             mode = Mode.Dry;
             isPowerOn = true;
             CreationDate = DateTime.Now;
-            serialNumber = $"00{new Random().Next(1000, 9999)}";
+            serialNumber = $"00{new Random().Next(1000, 9999)}"; // 004657
         }
 
         // ------------- methods
@@ -117,6 +117,7 @@
         // syntax: static return_type operator[symbol](parameters) { ... }
         public static Conditioner operator++(Conditioner conditioner)
         {
+            // [this] // static method does not have 'this'
             conditioner.Increase();
             return conditioner;
         }
@@ -130,6 +131,7 @@
             return left.Temperature < right.Temperature;
         }
 
+        // [explicit] or [implicit]
         public static explicit operator int(Conditioner conditioner)
         {
             return conditioner.Temperature;
@@ -143,6 +145,11 @@
             // --------- create instance of the class
             Conditioner my = new Conditioner("Samsung", "White"); // invoke constructor
             
+            my.Temperature = 23;  // set - set value
+            my.Temperature = -10; // set - ignore value
+
+            Console.WriteLine("T: " + my.Temperature); // get - return value
+
             my.SwitchPower();
             Console.WriteLine($"My conditioner status: {my.Status}");
 
@@ -168,13 +175,20 @@
 
             Console.WriteLine(your);
 
+            int a = 10;
+            int b = 20;
+
+            int c = a + b;
+
             // ------------------- Conditioner operators
             Conditioner his = ++my;
 
             if (my > your)
                 Console.WriteLine("My is bigger than your!");
 
-            int number = (int)my; // explicit only
+            int number = (int)my;   // explicit only
+            // int num = my;        // implicit not allowed
+
             Console.WriteLine($"Conditioner as a number: {number}");
         }
     }
