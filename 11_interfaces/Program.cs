@@ -43,10 +43,19 @@ namespace _11_interfaces
         public double Weight { get; set; }
 
         // Move() - has a default realization
+        void Move()
+        {
+            Console.WriteLine($"Tiger is moving with speed of {Speed}km/h...");
+        }
 
         public void Run()
         {
             Console.WriteLine($"Tiger is running with the speed of {Speed}km/h...");
+        }
+
+        public void Jump()
+        {
+            Console.WriteLine("Jumping...");
         }
     }
 

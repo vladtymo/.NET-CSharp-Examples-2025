@@ -78,6 +78,17 @@ namespace _12_system_interfaces
 
             team.Sort();
 
+            List<int> numbers = new List<int> { 5, 7, 4, 2, 10, 450, -50 };
+
+            // implementation foreach() logic
+            var iterator = numbers.GetEnumerator();
+
+            while (iterator.MoveNext())
+            {
+                Console.WriteLine(iterator.Current);
+            }
+            //-----------------
+
             // foreach() - requires IEnumerable interface implementation
             foreach (var p in team)
             {

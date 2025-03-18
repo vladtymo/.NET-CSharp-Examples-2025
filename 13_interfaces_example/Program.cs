@@ -83,7 +83,12 @@
         {
             Console.WriteLine($"{shape.Name} filler: {shape.Filler}");
 
-            //shape.Move(10, 10);
+            if (shape is Rectangle rect) 
+            {
+                Console.WriteLine("Width: " + rect.Width + "cm");
+            }
+
+            shape.Move(10, 10);
             shape.Print();
         }
         static void Main(string[] args)
