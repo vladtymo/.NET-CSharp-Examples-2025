@@ -18,7 +18,7 @@ namespace _19_LINQ
         static void Main(string[] args)
         {
             string[] colors = { "red", "blue", "black", "yellow", "orange", "white", "gray" };
-            int[] numbers = { 1, 6, -3, 12, 663, 992, -3, 1, -34, 40, -10, 0, 99, 123 };
+            int[] numbers = { 1, 6, -3, 12, 663, 992, -3, 1, -34, 40, 5690, -10, 0, 99, 123 };
             List<Product> products = new()
             {
                 new Product("iPhone X", "Electronics", 430),
@@ -37,10 +37,13 @@ namespace _19_LINQ
             filtered = numbers.Where(checker);
             filtered = numbers.Where(n => n % 3 == 0);
 
+            var filteredProducts = products.Where(p => p.Price > 1000);
+
             ShowCollection(filtered, "Filtered");
 
             // OrderBy[Descending](key) - sort colllection by key value
             var sorted = numbers.OrderBy(x => Math.Abs(x));
+            sorted = numbers.OrderBy(x => x.ToString().Last());
             // numbers.OrderByDescending(x => x);
             var sortedByPrice = products.OrderBy(p => p.Price);
 
@@ -55,7 +58,7 @@ namespace _19_LINQ
             var mapped = products.Select(x => new
             {
                 Model = x.Model,
-                Price = x.Price * 37
+                Price = x.Price * 42
             });
 
             ShowCollection(modules, "Modules");
@@ -77,16 +80,19 @@ namespace _19_LINQ
             Console.WriteLine($"Avg price: {avgPrice}");
             Console.WriteLine($"The cheapest product: {cheapest}");
             Console.WriteLine($"Even numbers: {evenCount}");
+            Console.WriteLine($"Negative numbers: {numbers.Count(x => x < 0)}");
 
             // Take(count) - get the first element of count
             var top3 = numbers.OrderByDescending(x => x).Take(3);
+            var topProducts = products.OrderByDescending(x => x.Price).Take(2);
 
             ShowCollection(top3, "TOP 3");
+            ShowCollection(topProducts, "TOP 2 Products");
 
             // First([condition]) Last([condition]) - get first/last element,
             //                                        if there's no element - throw Exception
             var firstNum = numbers.First(x => x < 0);
-            var lastNum = numbers.Last(x => x % 10 == 0 && x != 0);
+            var lastNum = numbers.Last(x => x % 10 == 0 && x > 0);
             // FirstOrDefault([condition]) LastOrDefault([condition]) - get first/last element,
             //                                                          if there's no element - return default value
             var car = products.FirstOrDefault(p => p.Category == "Auto");
@@ -101,16 +107,10 @@ namespace _19_LINQ
 
             // GroupBy(key) - gorup all element by key
             var groups = products.GroupBy(p => p.Category);
+            ShowGroups(groups, "Products by Category");
 
-            foreach (var g in groups)
-            {
-                // g - contains group items
-                Console.WriteLine($"Group {g.Key}:");
-                foreach (var i in g)
-                {
-                    Console.WriteLine('\t' + i.ToString());
-                }
-            }
+            var numByLen = numbers.GroupBy(x => Math.Abs(x).ToString().Length);
+            ShowGroups(numByLen, "Numbers by digits");
         }
 
         static void ShowCollection<T>(IEnumerable<T> collection, string? title = null)
@@ -119,6 +119,21 @@ namespace _19_LINQ
             foreach (var item in collection)
             {
                 Console.Write(item + " ");
+            }
+            Console.WriteLine();
+        }
+
+        static void ShowGroups<TKey, TVal>(IEnumerable<IGrouping<TKey, TVal>> groups, string? title = null)
+        {
+            Console.WriteLine($"----- {title ?? "Groups"} -----");
+            foreach (var g in groups)
+            {
+                // g - contains group items
+                Console.WriteLine($"Group {g.Key}:");
+                foreach (var i in g)
+                {
+                    Console.WriteLine('\t' + i.ToString());
+                }
             }
             Console.WriteLine();
         }
