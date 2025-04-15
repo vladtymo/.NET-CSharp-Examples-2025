@@ -53,6 +53,13 @@ int year = int.Parse(Console.ReadLine());
 
 Console.WriteLine($"You are {DateTime.Now.Year - year} years old...");
 
+// TryParse - validate input data before converting
+Console.Write("Enter your age: ");
+if (int.TryParse(Console.ReadLine(), out int age))
+    Console.WriteLine($"Your age: {age}");
+else
+    Console.WriteLine("Invalid age!");
+
 //////////////////////////// HOMEWORK
 // Task 1
 Console.Write("Enter the square side length (cm): ");
