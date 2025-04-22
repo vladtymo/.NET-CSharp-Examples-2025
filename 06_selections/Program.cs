@@ -6,6 +6,8 @@
 Console.Write("Enter your name: ");
 string name = Console.ReadLine();
 
+// Ctrl + K + F - format code
+
 if (char.IsUpper(name[0]))
 {
     Console.WriteLine("Name is correct!");
@@ -18,7 +20,7 @@ else
 }
 
 // we can avoid {} if block has only one statement inside
-if (name.Length < 3) 
+if (name.Length < 3)
     Console.WriteLine("Name too short!");
 else
     Console.WriteLine("Name has a good length!");
@@ -27,7 +29,7 @@ else
 Console.Write("Enter your age: ");
 int age = int.Parse(Console.ReadLine());
 
-if (age >= 0 && age <= 16)
+if (age > 0 && age <= 16)
     Console.WriteLine("You are young boy!");
 else if (age > 16 && age < 50)
     Console.WriteLine("You are adult man!");
@@ -39,30 +41,30 @@ Console.Write("Enter a mark (1-5): ");
 int mark = int.Parse(Console.ReadLine());
 
 // --------------- if (condition) { } else { }
-//if (mark == 5)
-//{
-//    Console.WriteLine("Excellent!");
-//}
-//else if (mark == 4)
-//{
-//    Console.WriteLine("Good!");
-//}
-//else if (mark == 3)
-//{
-//    Console.WriteLine("Normal!");
-//}
-//else if (mark == 2)
-//{
-//    Console.WriteLine("Bad!");
-//}
-//else if (mark == 1)
-//{
-//    Console.WriteLine("Very Bad!");
-//}
-//else
-//{
-//    Console.WriteLine("Mark is incorrrect!");
-//}
+if (mark == 5)
+{
+    Console.WriteLine("Excellent!");
+}
+else if (mark == 4)
+{
+    Console.WriteLine("Good!");
+}
+else if (mark == 3)
+{
+    Console.WriteLine("Normal!");
+}
+else if (mark == 2)
+{
+    Console.WriteLine("Bad!");
+}
+else if (mark == 1)
+{
+    Console.WriteLine("Very Bad!");
+}
+else
+{
+    Console.WriteLine("Mark is incorrrect!");
+}
 
 // --------------- switch (expression) { case 1: ... break; case 2: ... break; }
 switch (mark)
@@ -73,6 +75,28 @@ switch (mark)
     case 4: Console.WriteLine("Good!"); break;
     case 5: Console.WriteLine("Excellent!"); break;
     default:
-        Console.WriteLine("Incorrect mark!"); 
+        Console.WriteLine("Incorrect mark!");
         break;
 }
+
+string str1 = "";
+string? str2 = null;
+
+// TASK: enter weekday and show my working status
+Console.Write("Enter a mark (1-5): ");
+int day = int.Parse(Console.ReadLine()!);
+
+switch (day)
+{
+    case 6: 
+    case 7: Console.WriteLine("I am free!"); break;
+
+    case 3: 
+    case 4:
+    case 5: Console.WriteLine("I am busy!"); break;
+    default:
+        Console.WriteLine("Incorrect day!");
+        break;
+}
+
+Console.WriteLine("Bye!");

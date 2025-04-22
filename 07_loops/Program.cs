@@ -39,7 +39,6 @@ while (count < 10) // check condition
     Console.WriteLine($"while: [{count}] Iteration!");
     ++count; // do expression
 }
-
 // we can do the same with the for loop
 
 // ------------ for (initialize; condition; expression) { ...code... }
