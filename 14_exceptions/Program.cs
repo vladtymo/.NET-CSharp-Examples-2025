@@ -2,13 +2,24 @@
 {
     private static void Main(string[] args)
     {
-        // string str = null;
-        // str.Replace('#', '@'); // NullReferenceException
+        //string str = null;
+        //str.Replace('#', '@'); // NullReferenceException
         // Unhandled exception -> app aborted 
 
         //ExceptionsExample();
         //FinallyExample();
-        ThrowExample();
+        UserTest();
+
+        try
+        {
+            Console.Write("Enter b: ");
+            int b = int.Parse(Console.ReadLine());
+            ThrowExample(4, b);
+        }
+        catch (DiviveBy10Exception e)
+        {
+            Console.WriteLine(e.Message);
+        }
 
         Console.WriteLine("Continue........");
     }
@@ -26,6 +37,7 @@
 
             Console.WriteLine($"Next year is {year + 1}");
         }
+        
         catch (ArgumentNullException ex)
         {
             // handle exception logic...
@@ -43,6 +55,7 @@
         {
             Console.WriteLine($"Something went wrong: {ex.Message}");
         }
+
     }
     private static void FinallyExample()
     {
@@ -71,27 +84,25 @@
             writer.Close();
         }
     }
-    private static void ThrowExample()
+    private static void ThrowExample(int a, int b)
     {
-        User user = new() { Name = "Nazar", Age = 44 };
+        if (b == 0) throw new Exception("Division by zero is not allowed!");
+        if (a <= 0) throw new ArgumentException("Argument a must be greater than 0!");
+        if (b == 10) throw new DiviveBy10Exception();
 
-        //bool isValid = false;
-        //do
-        //{
-        //    try
-        //    {
-        //        Console.Write("Enter user name: ");
-        //        user.Name = Console.ReadLine();
-        //        isValid = true;
-        //    }
-        //    catch (ArgumentException ex)
-        //    {
-        //        Console.WriteLine(ex.Message);
-        //    }
-
-        //} while (!isValid);
-
-        Console.WriteLine(user);
+        Console.WriteLine($"Result: {a / b}");
+    }
+    private static void UserTest()
+    {
+        try
+        {
+            User user = new() { Name = "nazar", Age = -10 };
+            Console.WriteLine(user);
+        }
+        catch (ArgumentException ex)
+        {
+            Console.WriteLine(ex.Message);
+        }
     }
 }
 
@@ -135,5 +146,13 @@ public class User
         //Name ?? "no name"
 
         return $"User: {Name ?? "no name"} is {Age} years old";
+    }
+}
+
+class DiviveBy10Exception : Exception
+{
+    public DiviveBy10Exception() : base("Can not divide by 10!") { }
+    public DiviveBy10Exception(string message) : base(message)
+    {
     }
 }

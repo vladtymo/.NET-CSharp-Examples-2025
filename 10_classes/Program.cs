@@ -150,7 +150,7 @@
         {
             // --------- create instance of the class
             Conditioner my = new Conditioner("Samsung", "White"); // invoke constructor
-           
+
             my.Temperature = 23;  // set - set value
             my.Temperature = -10; // set - ignore value
 

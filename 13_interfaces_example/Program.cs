@@ -83,7 +83,7 @@
         {
             Console.WriteLine($"{shape.Name} filler: {shape.Filler}");
 
-            if (shape is Rectangle rect) 
+            if (shape is Rectangle rect)
             {
                 Console.WriteLine("Width: " + rect.Width + "cm");
             }
