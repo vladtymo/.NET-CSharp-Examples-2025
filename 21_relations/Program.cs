@@ -113,11 +113,13 @@ namespace _21_relations
         }
         public void TakePhoto()
         {
-            Console.WriteLine("Taking a photo...");
+            Console.WriteLine($"Taking a photo of {Camera.Megapixels} MP");
         }
 
         public void InjectSIM(SimCard sim)
         {
+            if (sim == null) throw new ArgumentNullException();
+
             if (IsSimExists)
             {
                 Console.WriteLine("SIM Card is already injected!");

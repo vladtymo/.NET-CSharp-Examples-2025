@@ -17,13 +17,13 @@ namespace _20_regex
             // ^ - початок тексту повинен відповідати шаблону
             // $ - кінець тексту повинен відповідати шаблону
 
+            regex = new Regex(@"\w{2,}@\w+\.\w+");
+
             bool isValid = false;
             do
             {
                 Console.Write("Enter your email address: ");
                 string email = Console.ReadLine();
-
-                regex = new Regex(@"\w{2,}@\w+\.\w+");
 
                 isValid = regex.IsMatch(email);
 
@@ -61,6 +61,7 @@ namespace _20_regex
             // Regex.Replace() - замінює текст, який відповідає шаблону
 
             string text = "blalba 847563981 argg aeg aegha 454545451 ajerg ia 987654321 Bye!";
+            // $1 - номер групи
             string output = Regex.Replace(text, @"(\d{2})(\d{2})(\d{2})(\d{3})", "+38 (0$1)-$2-$3-$4");
             //string output = Regex.Replace(text, @"\d{9}", (m) => string.Format("{0:+38 (0##)-##-##-###}", Convert.ToInt64(m.Value)));
             Console.WriteLine(output);

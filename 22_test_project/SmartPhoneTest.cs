@@ -11,8 +11,16 @@ namespace _22_test_project
         [TestMethod]
         public void TestInjectSIM()
         {
+            // arrange
+            // act
             phone.InjectSIM(card);
+            // assert
             Assert.IsTrue(phone.IsSimExists, "SIM inject methods does not work correctly!");
+        }
+        [TestMethod]
+        public void TestInjectSIMWithArgumentNull()
+        {
+            Assert.ThrowsException<ArgumentNullException>(() => phone.InjectSIM(null));
         }
 
         [TestMethod]

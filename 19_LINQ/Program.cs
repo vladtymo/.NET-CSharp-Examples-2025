@@ -34,17 +34,17 @@ namespace _19_LINQ
 
             // Where(condition) - filter collection element by condition
             var filtered = numbers.Where(IsTwoDigits);
-            filtered = numbers.Where(checker);
-            filtered = numbers.Where(n => n % 3 == 0);
-
-            var filteredProducts = products.Where(p => p.Price > 1000);
+            //filtered = numbers.Where(checker);
+            //filtered = numbers.Where(n => n % 3 == 0);
 
             ShowCollection(filtered, "Filtered");
+
+            var filteredProducts = products.Where(p => p.Price > 1000);
 
             // OrderBy[Descending](key) - sort colllection by key value
             var sorted = numbers.OrderBy(x => Math.Abs(x));
             sorted = numbers.OrderBy(x => x.ToString().Last());
-            // numbers.OrderByDescending(x => x);
+            //numbers.OrderByDescending(x => x);
             var sortedByPrice = products.OrderBy(p => p.Price);
 
             ShowCollection(sorted, "Sorted");
@@ -105,18 +105,28 @@ namespace _19_LINQ
             else
                 Console.WriteLine($"First auto: {car}");
 
-            // GroupBy(key) - gorup all element by key
+            // GroupBy(key) - group all element by key
             var groups = products.GroupBy(p => p.Category);
             ShowGroups(groups, "Products by Category");
 
             var numByLen = numbers.GroupBy(x => Math.Abs(x).ToString().Length);
             ShowGroups(numByLen, "Numbers by digits");
+
+            // --------------- IQueryable<T> ---------------
+            var query = numbers.Where(x => x < 0); // commands only
+            query = query.OrderBy(x => x);       // commands only
+
+            //query = query.ToList();                // execute commands (load data)
+
+            numbers[0] = -33;
+
+            ShowCollection(query, "Negative numbers");
         }
 
         static void ShowCollection<T>(IEnumerable<T> collection, string? title = null)
         {
             Console.Write($"{title ?? "Array"}: ");
-            foreach (var item in collection)
+            foreach (var item in collection) // load data
             {
                 Console.Write(item + " ");
             }
